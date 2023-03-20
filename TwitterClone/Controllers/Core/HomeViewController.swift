@@ -11,7 +11,7 @@ class Home_ViewController: UIViewController {
     
     private let timelineTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TweetTableViewCell.self , forCellReuseIdentifier: TweetTableViewCell.indentifier)
         return tableView
         
     }()
@@ -36,8 +36,9 @@ extension Home_ViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Tweet"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.indentifier, for: indexPath)  as? TweetTableViewCell else {
+            return UITableViewCell()
+        }
         return cell
     }
      
